@@ -1,8 +1,13 @@
+import '@/styles/globalStyles.css';
 import type { AppProps } from 'next/app';
-import '../styles/globalStyles.css';
+import { TenantProvider } from '@/tenants/tenantContext';
 
-function RootApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <TenantProvider>
+      <Component {...pageProps} />
+    </TenantProvider>
+  );
 }
 
-export default RootApp;
+export default MyApp;

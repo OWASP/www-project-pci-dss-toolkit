@@ -1,10 +1,17 @@
-import React from 'react';
+import { useTenant } from '@/tenants/tenantContext';
+import { tenantComplianceData } from '@/tenants/data/tenantData';
+import TenantSwitcher from './TenantSwitcher';
 
 const AdminDashboard = () => {
+  const { tenantId } = useTenant();
+  const data = tenantComplianceData[tenantId];
+
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-3xl font-bold mb-4">Compliance Monitoring Dashboard</h1>
-      <p className="text-gray-600">Track real-time PCI compliance and system health.</p>
+    <div className="p-4">
+      <TenantSwitcher />
+      <h1 className="text-2xl font-bold mt-4">{data.name} Compliance Dashboard</h1>
+      <p>Compliance Score: {data.complianceScore}%</p>
+      <p>Open Issues: {data.issues}</p>
     </div>
   );
 };
